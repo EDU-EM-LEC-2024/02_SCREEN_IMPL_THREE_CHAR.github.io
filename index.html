@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-
+        
+        body canvas{
+            width : 100vw !important;
+            height : 100vh !important;
+        }
+        body::-webkit-scrollbar{
+            display:none;
+        }
     </style>
 </head>
 <body>
@@ -26,13 +33,13 @@
            
         })
     </script>
-    <!--
-    <select name="" id="changeAction" onchange="javascript:game.changeAction()">
+<!--
+    <select name="" id="changeAction" onchange="javascript:game.changeAction()">     
         <option selected value="Idle">IDLE</option>
         <option  value="Run">RUN</option>
         <option  value="Walk">WALK</option>
         <option  value="BackWard">BACK</option>
     </select>
-    -->
+-->    
 </body>
 </html>
