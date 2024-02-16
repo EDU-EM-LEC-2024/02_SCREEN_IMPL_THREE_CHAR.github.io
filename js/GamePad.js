@@ -80,7 +80,7 @@ class GamePad{
         console.log({x:Xvalue , y:Yvalue});
         return {x:Xvalue , y:Yvalue};
     }
-    touch(event){
+    async touch(event){
         console.log("touch! ");
         event = event || window.event;
         this.offset = this.getMousePosition(event);
@@ -96,7 +96,7 @@ class GamePad{
         }
 
     }
-    move(event){
+    async move(event){
         const mouse = this.getMousePosition(event);
         console.log("move! ");
         let left = mouse.x - this.offset.x;
@@ -121,7 +121,7 @@ class GamePad{
         //--------------------------        
         
     }
-    up(){
+    async up(){
         if('ontouchstart' in window){
             document.ontouchmove = null;
             document.touchend = null;
