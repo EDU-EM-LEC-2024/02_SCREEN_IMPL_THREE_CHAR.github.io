@@ -9,7 +9,7 @@ class GamePad{
         //--------------------------
         const padHole = document.createElement("div");
         padHole.style.cssText
-        ="position:absolute;width:120px;height:120px;bottom:50px;left:10vw !important;"
+        ="position:absolute;width:120px;height:120px;bottom:10vh;left:10vw !important;"
         +"background-color:white;border:#353535 solid medium; border-radius:50%;left:50%;";
         const stick = document.createElement("div");
         stick.style.cssText="position:absolute;left:30px;top:30px;width:60px;height:60px; border-radius:50%; background-color:gray;border : 1px solid ;";
