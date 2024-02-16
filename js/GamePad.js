@@ -27,7 +27,7 @@ class GamePad{
         const btn_02 = document.createElement("div");
         btn_02.innerHTML='😒';
         btn_02.setAttribute('style',"display:flex;justify-content:center;align-items:center;font-size:2rem !important;")
-        btn_02.style.cssText="position:absolute;right:13vw;bottom:13vh;width:60px;height:60px; border-radius:50%; border : 1px solid; background-color:white;cursor:pointer;font-size:2rem;display:flex;justify-content:center;align-items:center;";
+        btn_02.style.cssText="position:absolute;right:15vw;bottom:15vh;width:60px;height:60px; border-radius:50%; border : 1px solid; background-color:white;cursor:pointer;font-size:2rem;display:flex;justify-content:center;align-items:center;";
         document.body.appendChild(btn_02);
         btn_02.addEventListener('click',function(){
            
@@ -35,7 +35,7 @@ class GamePad{
         const btn_03 = document.createElement("div");
         btn_03.innerHTML='😍';
         btn_03.setAttribute('style',"display:flex;justify-content:center;align-items:center;font-size:2rem !important;")
-        btn_03.style.cssText="position:absolute;right:21vw;bottom:5vh;width:60px;height:60px; border-radius:50%; border : 1px solid; background-color:white;cursor:pointer;font-size:2rem;display:flex;justify-content:center;align-items:center;";
+        btn_03.style.cssText="position:absolute;right:25vw;bottom:5vh;width:60px;height:60px; border-radius:50%; border : 1px solid; background-color:white;cursor:pointer;font-size:2rem;display:flex;justify-content:center;align-items:center;";
         document.body.appendChild(btn_03);
         btn_03.addEventListener('click',function(){
            
