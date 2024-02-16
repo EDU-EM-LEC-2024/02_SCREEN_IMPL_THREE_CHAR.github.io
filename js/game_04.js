@@ -318,7 +318,7 @@ class Game{
 
     move(dt){
         if(this.player.move.moveF>0){
-            const speed = (this.player.action=='Run') ? 500 : 200;
+            const speed = (this.player.action=='Run') ? 700 : 200;
             this.player.object.translateZ(dt*speed); //이동
         }else{
             this.player.object.translateZ(-dt*100);
