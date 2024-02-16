@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    
+
+
+    <script src="./lib/three.min.js"></script>
+    <script src="./lib/fflate.min.js"></script>
+    <script src="./lib/FBXLoader.js"></script>
+    <script src="./lib/OrbitControls.js"></script>
+    <script src="./js/GamePad.js"></script>
+    <script src="./js/game_04.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded",function(){
+            
+            const game = new Game();
+            window.game = game;
+           
+        })
+    </script>
+    <select name="" id="changeAction" onchange="javascript:game.changeAction()">
+        
+        <option selected value="Idle">IDLE</option>
+        <option  value="Run">RUN</option>
+        <option  value="Walk">WALK</option>
+        <option  value="BackWard">BACK</option>
+
+    </select>
+</body>
+</html>
