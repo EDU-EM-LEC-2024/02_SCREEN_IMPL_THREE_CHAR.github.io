@@ -9,12 +9,43 @@ class GamePad{
         //--------------------------
         const padHole = document.createElement("div");
         padHole.style.cssText
-        ="position:absolute;width:120px;height:120px;bottom:50px;"
-        +"background:rgba(243,97,166,0.5);border:#353535 solid medium; border-radius:50%;left:50%;";
+        ="position:absolute;width:120px;height:120px;bottom:50px;left:10vw !important;"
+        +"background-color:white;border:#353535 solid medium; border-radius:50%;left:50%;";
         const stick = document.createElement("div");
-        stick.style.cssText="position:absolute;left:30px;top:30px;width:60px;height:60px; border-radius:50%; background-color:gray;";
+        stick.style.cssText="position:absolute;left:30px;top:30px;width:60px;height:60px; border-radius:50%; background-color:gray;border : 1px solid ;";
+        
+
+        //--------------------------
+        const btn_01 = document.createElement("div");
+        btn_01.innerHTML='😊';
+        btn_01.setAttribute('style',"")
+        btn_01.style.cssText="position:absolute;right:5vw;bottom:5vh;width:60px;height:60px; border-radius:50%; border : 1px solid; background-color:white;cursor:pointer;font-size:2rem;display:flex;justify-content:center;align-items:center;";
+        document.body.appendChild(btn_01);
+        btn_01.addEventListener('click',function(){
+           
+        })
+        const btn_02 = document.createElement("div");
+        btn_02.innerHTML='😒';
+        btn_02.setAttribute('style',"display:flex;justify-content:center;align-items:center;font-size:2rem !important;")
+        btn_02.style.cssText="position:absolute;right:13vw;bottom:13vh;width:60px;height:60px; border-radius:50%; border : 1px solid; background-color:white;cursor:pointer;font-size:2rem;display:flex;justify-content:center;align-items:center;";
+        document.body.appendChild(btn_02);
+        btn_02.addEventListener('click',function(){
+           
+        })
+        const btn_03 = document.createElement("div");
+        btn_03.innerHTML='😍';
+        btn_03.setAttribute('style',"display:flex;justify-content:center;align-items:center;font-size:2rem !important;")
+        btn_03.style.cssText="position:absolute;right:21vw;bottom:5vh;width:60px;height:60px; border-radius:50%; border : 1px solid; background-color:white;cursor:pointer;font-size:2rem;display:flex;justify-content:center;align-items:center;";
+        document.body.appendChild(btn_03);
+        btn_03.addEventListener('click',function(){
+           
+        })
+        //--------------------------
+
         padHole.appendChild(stick);
         document.body.appendChild(padHole);
+        
+
         this.domElement = stick;
         this.maxRadius = 60*60;
         this.game = param.game;
@@ -60,8 +91,8 @@ class GamePad{
             document.ontouchend = function(event){event.preventDefault();pad.up(event);};
         }else{
             
-            document.onmousemove = function(event){  console.log("touch!  ontouchstart false"); event.preventDefault();pad.move(event);};
-            document.onmouseup =  function(event){ console.log("touch!  ontouchstart false"); event.preventDefault();pad.up(event);};            
+            document.onmousemove = function(event){  event.preventDefault();pad.move(event);};
+            document.onmouseup =  function(event){  event.preventDefault();pad.up(event);};            
         }
 
     }
