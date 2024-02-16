@@ -33,7 +33,7 @@ class Game{
         //-----------------------------
         //04 변경
         //----------------------------- 
-        this.camera = new THREE.PerspectiveCamera(90,window.innerWidth/window.innerHeight,0.1,3000);
+        this.camera = new THREE.PerspectiveCamera(100,window.innerWidth/window.innerHeight,0.1,10000);
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize(window.innerWidth,window.innerHeight);
         document.body.appendChild(this.renderer.domElement);
@@ -47,11 +47,12 @@ class Game{
         //03 그림자
         //-----------------------------
         light.castShadow = true;
-        light.shadow.camera.top =50;
+        light.shadow.camera.top =250;
         light.shadow.camera.bottom =-50;
         light.shadow.camera.left =-50;
         light.shadow.camera.right =50;
         this.shadow = light;
+        
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(window.innerWidth,window.innerHeight);
         this.renderer.shadowMap.enabled = true;
@@ -79,7 +80,7 @@ class Game{
         var grid = new THREE.GridHelper(5000,50,0x000000,0x000000);
         grid.position.y = -30;
         grid.material.transparent = true;
-        grid.material.opacity = 0.3;
+        grid.material.opacity = .3;
         this.scene.add(grid);
         //-----------------------------
 
@@ -87,9 +88,11 @@ class Game{
         //-----------------------------
         //04 주석
         //-----------------------------
-        //this.camera.position.z = 5;
+        this.camera.position.x = 0;
+        this.camera.position.y = 0;
+        this.camera.position.z = 0;
         //-----------------------------
-       
+        
 
         const fbxloader = new THREE.FBXLoader();
         // const game = this;
@@ -111,9 +114,9 @@ class Game{
             //-----------------------------
             //04 수정
             //-----------------------------
-            object.scale.x = 60;
-            object.scale.y = 60;
-            object.scale.z = 60;
+            object.scale.x = 40;
+            object.scale.y = 40;
+            object.scale.z = 40;
 
             //-----------------------------
             //03 그림자
@@ -275,9 +278,9 @@ class Game{
             //-----------------------------
             //04 움직이기 (변경)
             //-----------------------------
-            this.shadow.position.x = this.player.object.position.x+50;
-            this.shadow.position.y = this.player.object.position.y+100;
-            this.shadow.position.z = this.player.object.position.z-200;
+            this.shadow.position.x = this.player.object.position.x+70;
+            this.shadow.position.y = this.player.object.position.y+70;
+            this.shadow.position.z = this.player.object.position.z-70;
             this.shadow.target = this.player.object;
 
         }
@@ -347,7 +350,7 @@ class Game{
     }
     Cameras(){
         const back = new THREE.Object3D();
-        back.position.set(0,500,-700);
+        back.position.set(0,1000,-700);
         back.parent = this.player.object;
         this.player.camera = {back};
         game.activeCamera = this.player.camera.back;
