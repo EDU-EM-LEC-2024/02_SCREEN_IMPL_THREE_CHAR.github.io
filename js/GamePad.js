@@ -21,24 +21,57 @@ class GamePad{
         btn_01.setAttribute('style',"")
         btn_01.style.cssText="position:absolute;right:5vw;bottom:10vh;width:60px;height:60px; border-radius:50%; border : 1px solid; background-color:white;cursor:pointer;font-size:2rem;display:flex;justify-content:center;align-items:center;";
         document.body.appendChild(btn_01);
+        
+        const smileEl = document.createElement("div");
+        smileEl.classList.add('smile');
+        smileEl.innerHTML='😊';
+        smileEl.style.cssText="width:40px;height:40px;position:absolute;top:43%;left:50%;font-size:0rem;display:flex;justify-content:center;align-items:center;transition:.3s;opacity:.8";
+        document.body.appendChild(smileEl);
         btn_01.addEventListener('click',function(){
-           
+            smileEl.style.fontSize="2rem";
+            setTimeout(()=>{
+                smileEl.style.fontSize="0rem";
+            },1000)
+            
+            
+            console.log(param.game.player.object);
         })
+
         const btn_02 = document.createElement("div");
         btn_02.innerHTML='😒';
         btn_02.setAttribute('style',"display:flex;justify-content:center;align-items:center;font-size:2rem !important;")
         btn_02.style.cssText="position:absolute;right:15vw;bottom:20vh;width:60px;height:60px; border-radius:50%; border : 1px solid; background-color:white;cursor:pointer;font-size:2rem;display:flex;justify-content:center;align-items:center;";
         document.body.appendChild(btn_02);
+
+        const sadEl = document.createElement("div");
+        sadEl.classList.add('smile');
+        sadEl.innerHTML='😒';
+        sadEl.style.cssText="width:40px;height:40px;position:absolute;top:43%;left:50%;font-size:0rem;display:flex;justify-content:center;align-items:center;transition:.3s;opacity:.8";    
+        document.body.appendChild(sadEl);    
         btn_02.addEventListener('click',function(){
-           
+            sadEl.style.fontSize="2rem";
+            setTimeout(()=>{
+                sadEl.style.fontSize="0rem";
+            },1000)
         })
+        
         const btn_03 = document.createElement("div");
         btn_03.innerHTML='😍';
         btn_03.setAttribute('style',"display:flex;justify-content:center;align-items:center;font-size:2rem !important;")
         btn_03.style.cssText="position:absolute;right:25vw;bottom:10vh;width:60px;height:60px; border-radius:50%; border : 1px solid; background-color:white;cursor:pointer;font-size:2rem;display:flex;justify-content:center;align-items:center;";
         document.body.appendChild(btn_03);
+
+        const lovelyEl = document.createElement("div");
+        lovelyEl.classList.add('smile');
+        lovelyEl.innerHTML='😍';
+        lovelyEl.style.cssText="width:40px;height:40px;position:absolute;top:43%;left:50%;font-size:0rem;display:flex;justify-content:center;align-items:center;transition:.3s;opacity:.8";    
+        document.body.appendChild(lovelyEl);  
+
         btn_03.addEventListener('click',function(){
-           
+            lovelyEl.style.fontSize="2rem";
+            setTimeout(()=>{
+                lovelyEl.style.fontSize="0rem";
+            },1000)
         })
         //--------------------------
 
