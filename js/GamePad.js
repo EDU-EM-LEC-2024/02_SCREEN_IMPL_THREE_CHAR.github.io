@@ -1,11 +1,12 @@
 class GamePad{
     constructor(param){
-        console.log(param);
+        console.log("GAMEPAD...",param);
         //--------------------------
         //04
         //--------------------------
+        this.game = param;
         this.pc = param.pc;
-
+        
         //--------------------------
         const padHole = document.createElement("div");
         padHole.style.cssText
@@ -25,10 +26,10 @@ class GamePad{
         const smileEl = document.createElement("div");
         smileEl.classList.add('smile');
         smileEl.innerHTML='😊';
-        smileEl.style.cssText="width:40px;height:40px;position:absolute;top:43%;left:50%;font-size:0rem;display:flex;justify-content:center;align-items:center;transition:.3s;opacity:.8";
+        smileEl.style.cssText="width:40px;height:40px;position:absolute;top:41%;left:50%;font-size:0rem;display:flex;justify-content:center;align-items:center;transition:.3s;opacity:.8";
         document.body.appendChild(smileEl);
         btn_01.addEventListener('click',function(){
-            smileEl.style.fontSize="2rem";
+            smileEl.style.fontSize="1rem";
             setTimeout(()=>{
                 smileEl.style.fontSize="0rem";
             },1000)
@@ -46,10 +47,10 @@ class GamePad{
         const sadEl = document.createElement("div");
         sadEl.classList.add('smile');
         sadEl.innerHTML='😒';
-        sadEl.style.cssText="width:40px;height:40px;position:absolute;top:43%;left:50%;font-size:0rem;display:flex;justify-content:center;align-items:center;transition:.3s;opacity:.8";    
+        sadEl.style.cssText="width:40px;height:40px;position:absolute;top:41%;left:50%;font-size:0rem;display:flex;justify-content:center;align-items:center;transition:.3s;opacity:.8";    
         document.body.appendChild(sadEl);    
         btn_02.addEventListener('click',function(){
-            sadEl.style.fontSize="2rem";
+            sadEl.style.fontSize="1rem";
             setTimeout(()=>{
                 sadEl.style.fontSize="0rem";
             },1000)
@@ -64,14 +65,34 @@ class GamePad{
         const lovelyEl = document.createElement("div");
         lovelyEl.classList.add('smile');
         lovelyEl.innerHTML='😍';
-        lovelyEl.style.cssText="width:40px;height:40px;position:absolute;top:43%;left:50%;font-size:0rem;display:flex;justify-content:center;align-items:center;transition:.3s;opacity:.8";    
+        lovelyEl.style.cssText="width:40px;height:40px;position:absolute;top:41%;left:50%;font-size:0rem;display:flex;justify-content:center;align-items:center;transition:.3s;opacity:.8";    
         document.body.appendChild(lovelyEl);  
 
         btn_03.addEventListener('click',function(){
-            lovelyEl.style.fontSize="2rem";
+            lovelyEl.style.fontSize="1rem";
             setTimeout(()=>{
                 lovelyEl.style.fontSize="0rem";
-            },1000)
+            },1000);
+
+            //-------------------------
+            //JUMP(버튼에 대한 점프)
+            //-------------------------
+            var jump_high= setInterval(()=>{
+                param.game.player.object.position.y+=20;
+
+                if(param.game.player.object.position.y>300){
+                    clearInterval(jump_high);
+                    var jump_low =  setInterval(()=>{
+                        param.game.player.object.position.y-=10;
+                        if(param.game.player.object.position.y<=0){
+                            clearInterval(jump_low);
+                        }
+                    },20)
+                }
+             },20);
+             //-------------------------
+
+           
         })
         //--------------------------
 
@@ -104,7 +125,24 @@ class GamePad{
 
         }
 
-        
+        //---------------------------
+        // 키보드 스타일링 추가
+        //---------------------------
+
+        //---------------------------
+        // 키보드 이벤트 리스너 추가
+        //---------------------------
+        this.pressedKeys = [];
+        window.addEventListener('keydown', (e) => this.handleKeyDown(e));
+        window.addEventListener('keyup', (e) => this.handleKeyUp(e));
+
+        //-----------------------------
+        //JUMP
+        //-----------------------------
+        this.isJumping = false; // 점프 중인지 여부를 나타내는 변수
+        this.jumpHeight = 2.0; // 점프 높이 조절
+        this.isJumpingIntaval;
+
     }
 
     getMousePosition(e){
@@ -171,5 +209,140 @@ class GamePad{
 
         //--------------------------        
     }
+
+
+    //------------------------------
+    //키보드
+    //------------------------------
+    // 키보드 이벤트 처리
+    handleKeyDown(event) {
+        const keyCode = event.keyCode;
+
+        // 이미 눌린 키는 무시
+        if (!this.pressedKeys.includes(keyCode)) {
+            this.pressedKeys.push(keyCode);
+        }
+
+        // 모든 눌린 키에 대해 움직임과 점프를 누적
+        this.handleKeyActions(event);
+    }
+
+    handleKeyUp(event) {
+        const keyCode = event.keyCode;
+
+        // 눌려있던 키를 배열에서 제거
+        const index = this.pressedKeys.indexOf(keyCode);
+        if (index !== -1) {
+            this.pressedKeys.splice(index, 1);
+        }
+
+        // 떼어진 후의 모든 키에 대해 움직임과 점프를 누적
+        this.handleKeyActions(event);
+    }
+
+
+
+    handleKeyActions(event) {
+        let moveF = 0;
+        let moveT = 0;
+        let jump = false;
+
+        // 모든 눌린 키에 대해 움직임과 점프 누적
+        this.pressedKeys.forEach((keyCode) => {
+            switch (keyCode) {
+                case 32: // Space Bar
+                    jump = true;
+                                 
+                    break;
+                case 87: // W key
+                    moveF += 1;                
+                    break;
+                case 83: // S key
+                    moveF -= 1;
+                    break;
+                case 65: // A key
+                    moveT += 1;
+                    break;
+                case 68: // D key
+                    moveT -= 1;
+                    break;
+               
+
+            }
+        });
+
+        // 캐릭터에게 눌린 키에 따라 움직임과 점프 전달
+        this.pc.call(this.game, moveF, moveT);
+
+        if (jump) {
+ 
+                      
+            this.jump();
+           
+           
+        }
+    }
+
+    
+    //-----------------------------
+    // 06 점프
+    //-----------------------------
+    jump() {
+        console.log("JUMP STATUS ",this.isJumping);
+        
+        //this.game.selAction="Jump";
+  
+        console.log("JUMPING INTERVAL ",this.isJumpingIntaval);
+        if (!this.isJumping) 
+        { 
+                    
+            this.isJumping=true;
+  
+
+                //점프UP 
+
+                // setTimeout(()=>{
+
+
+                
+                // this.isJumpingIntaval = setInterval(()=>{
+                //         this.game.player.object.position.y+=20;
+                        
+
+                //         if(this.game.player.object.position.y>300){
+                //             clearInterval(this.isJumpingIntaval);
+                            
+                //             var jump_low =  setInterval(()=>{
+                //                 this.game.player.object.position.y-=10;
+                //                 if(this.game.player.object.position.y<=0){
+                //                     clearInterval(jump_low);
+                                
+                //                 }
+                                
+                //             },25)
+                //         }
+
+                //     },20);
+                
+                // },100)
+                 //점프UP End
+ 
+            
+
+            // setTimeout(()=>{
+            //         console.log("Y : " +this.game.player.object.position.y );     
+            //         this.game.selAction="Run";      
+            // },1500);
+                    
+               
+   
+        }
+        else {
+            // 점프 동작이 끝나면 초기화
+            this.isJumping = false;
+
+        }
+    }
+
 
 }
