@@ -1,11 +1,13 @@
 class Game{
     constructor(){
+        
         this.scene;
         this.player={};
         this.renderer;
         this.camera;
         this.orbCtrl;
         this.clock = new THREE.Clock();
+        
         //--------------------------
         //04 움직이기
         //--------------------------        
@@ -19,7 +21,10 @@ class Game{
         document.body.appendChild(this.container);
         //-----------------------------
         const game = this;
+
+
         this.aniInit();
+
 
     }
     aniInit(){
@@ -96,7 +101,7 @@ class Game{
 
         const fbxloader = new THREE.FBXLoader();
         // const game = this;
-        fbxloader.load(`./assets/RaccoonAction.fbx`,function(object){
+        fbxloader.load(`./assets/Raccoon_add_jump.fbx`,function(object){
 
             //-----------------------------
             //02 Added - Action
@@ -159,6 +164,8 @@ class Game{
                 }else if(element.name.includes("BackWard")){
                     //console.log("BackWard");
                     game.animations.BackWard = element;
+                }else if(element.name.includes("Jump")){
+                    game.animations.Jump = element;
                 }
 
             })
@@ -295,10 +302,13 @@ class Game{
         //-----------------------------
         if(this.player.action=='Walk'){
             const walkTime = Date.now()- this.player.actionTime;
-            if(walkTime>2000 && this.player.move.moveF>0){
+            if(walkTime>800 && this.player.move.moveF>0){
                 this.selAction='Run';
             }
         }
+
+
+
 
         if(this.player.move !==undefined) this.move(dt);
 
@@ -411,22 +421,27 @@ class Game{
     }
 
     playerCtrl(moveF,moveTurn){
+        
+     
         if(moveF>0.1){
             if(this.player.action!='Walk'&&this.player.action!='Run') this.selAction='Walk';
         }else if(moveF<-0.3){
             if(this.player.action!='BackWard') this.selAction='BackWard';
-        }else{
+        }
+        else{
             moveF = 0;
             if(this.player.action!="Idle"){
                 this.selAction = "Idle";
             }
         }
-        if(moveF==0 && moveTurn==0){
-            delete this.player.move;
 
+
+        if(moveF==0 && moveTurn==0 ){
+            delete this.player.move;
         }else {
             this.player.move = {moveF,moveTurn};
         }
+
     }
     set activeCamera(object){
         this.player.camera.active = object;
@@ -441,4 +456,6 @@ class Game{
     }
     //-----------------------------
 
+
 }
+ 
